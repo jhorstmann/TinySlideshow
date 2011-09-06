@@ -1,7 +1,7 @@
 var TINY={};
 
-function $(i){return document.getElementById(i)}
-function $$(e,p){p=p||document; return p.getElementsByTagName(e)}
+function $T(i){return document.getElementById(i)}
+function $$T(e,p){p=p||document; return p.getElementsByTagName(e)}
 
 TINY.slideshow=function(n){
 	this.infoSpeed=this.imgSpeed=this.speed=10;
@@ -16,29 +16,29 @@ TINY.slideshow=function(n){
 
 TINY.slideshow.prototype={
 	init:function(s,z,b,f,q){
-		s=$(s);
-		var m=$$('li',s), i=0, w=0;
+		s=$T(s);
+		var m=$$T('li',s), i=0, w=0;
 		this.l=m.length;
-		this.q=$(q);
-		this.f=$(z);
-		this.r=$(this.info);
+		this.q=$T(q);
+		this.f=$T(z);
+		this.r=$T(this.info);
 		this.o=parseInt(TINY.style.val(z,'width'));
 		if(this.thumbs){
-			var u=$(this.left), r=$(this.right);
+			var u=$T(this.left), r=$T(this.right);
 			u.onmouseover=new Function('TINY.scroll.init("'+this.thumbs+'",-1,'+this.scrollSpeed+')');
 			u.onmouseout=r.onmouseout=new Function('TINY.scroll.cl("'+this.thumbs+'")');
 			r.onmouseover=new Function('TINY.scroll.init("'+this.thumbs+'",1,'+this.scrollSpeed+')');
-			this.p=$(this.thumbs)
+			this.p=$T(this.thumbs)
 		}
 		for(i;i<this.l;i++){
 			this.a[i]={};
 			var h=m[i], a=this.a[i];
-			a.t=$$('h3',h)[0].innerHTML;
-			a.d=$$('p',h)[0].innerHTML;
-			a.l=$$('a',h)[0]?$$('a',h)[0].href:'';
-			a.p=$$('span',h)[0].innerHTML;
+			a.t=$$T('h3',h)[0].innerHTML;
+			a.d=$$T('p',h)[0].innerHTML;
+			a.l=$$T('a',h)[0]?$$T('a',h)[0].href:'';
+			a.p=$$T('span',h)[0].innerHTML;
 			if(this.thumbs){
-				var g=$$('img',h)[0];
+				var g=$$T('img',h)[0];
 				this.p.appendChild(g);
 				w+=parseInt(g.offsetWidth);
 				if(i!=this.l-1){
@@ -54,8 +54,8 @@ TINY.slideshow.prototype={
 			}
 		}
 		if(b&&f){
-			b=$(b);
-			f=$(f);
+			b=$T(b);
+			f=$T(f);
 			b.style.opacity=f.style.opacity=this.navOpacity/100;
 			b.style.filter=f.style.filter='alpha(opacity='+this.navOpacity+')';
 			b.onmouseover=f.onmouseover=new Function('TINY.alpha.set(this,'+this.navHover+',5)');
@@ -89,7 +89,7 @@ TINY.slideshow.prototype={
 		i.onload=new Function(this.n+'.le('+s+','+c+')');
 		i.src=this.a[s].p;
 		if(this.thumbs){
-			var a=$$('img',this.p), l=a.length, x=0;
+			var a=$$T('img',this.p), l=a.length, x=0;
 			for(x;x<l;x++){
 				a[x].style.borderColor=x!=s?'':this.active
 			}
@@ -118,7 +118,7 @@ TINY.slideshow.prototype={
 			this.q.onclick=this.q.onmouseover=null;
 			this.q.style.cursor='default'
 		}
-		var m=$$('img',this.f);
+		var m=$$T('img',this.f);
 		if(m.length>2){
 			this.f.removeChild(m[0])
 		}
@@ -126,8 +126,8 @@ TINY.slideshow.prototype={
 	nf:function(s){
 		if(this.info){
 			s=this.a[s];
-			$$('h3',this.r)[0].innerHTML=s.t;
-			$$('p',this.r)[0].innerHTML=s.d;
+			$$T('h3',this.r)[0].innerHTML=s.t;
+			$$T('p',this.r)[0].innerHTML=s.d;
 			this.r.style.height='auto';
 			var h=parseInt(this.r.offsetHeight);
 			this.r.style.height=0;
@@ -139,20 +139,20 @@ TINY.slideshow.prototype={
 TINY.scroll=function(){
 	return{
 		init:function(e,d,s){
-			e=typeof e=='object'?e:$(e); var p=e.style.left||TINY.style.val(e,'left'); e.style.left=p;
+			e=typeof e=='object'?e:$T(e); var p=e.style.left||TINY.style.val(e,'left'); e.style.left=p;
 			var l=d==1?parseInt(e.offsetWidth)-parseInt(e.parentNode.offsetWidth):0; e.si=setInterval(function(){TINY.scroll.mv(e,l,d,s)},20)
 		},
 		mv:function(e,l,d,s){
 			var c=parseInt(e.style.left); if(c==l){TINY.scroll.cl(e)}else{var i=Math.abs(l+c); i=i<s?i:s; var n=c-i*d; e.style.left=n+'px'}
 		},
-		cl:function(e){e=typeof e=='object'?e:$(e); clearInterval(e.si)}
+		cl:function(e){e=typeof e=='object'?e:$T(e); clearInterval(e.si)}
 	}
 }();
 
 TINY.height=function(){
 	return{
 		set:function(e,h,s,d){
-			e=typeof e=='object'?e:$(e); var oh=e.offsetHeight, ho=e.style.height||TINY.style.val(e,'height');
+			e=typeof e=='object'?e:$T(e); var oh=e.offsetHeight, ho=e.style.height||TINY.style.val(e,'height');
 			ho=oh-parseInt(ho); var hd=oh-ho>h?-1:1; clearInterval(e.si); e.si=setInterval(function(){TINY.height.tw(e,h,ho,hd,s)},20)
 		},
 		tw:function(e,h,ho,hd,s){
@@ -165,7 +165,7 @@ TINY.height=function(){
 TINY.alpha=function(){
 	return{
 		set:function(e,a,s){
-			e=typeof e=='object'?e:$(e); var o=e.style.opacity||TINY.style.val(e,'opacity'),
+			e=typeof e=='object'?e:$T(e); var o=e.style.opacity||TINY.style.val(e,'opacity'),
 			d=a>o*100?1:-1; e.style.opacity=o; clearInterval(e.ai); e.ai=setInterval(function(){TINY.alpha.tw(e,a,d,s)},20)
 		},
 		tw:function(e,a,d,s){
@@ -175,4 +175,4 @@ TINY.alpha=function(){
 	}
 }();
 
-TINY.style=function(){return{val:function(e,p){e=typeof e=='object'?e:$(e); return e.currentStyle?e.currentStyle[p]:document.defaultView.getComputedStyle(e,null).getPropertyValue(p)}}}();
+TINY.style=function(){return{val:function(e,p){e=typeof e=='object'?e:$T(e); return e.currentStyle?e.currentStyle[p]:document.defaultView.getComputedStyle(e,null).getPropertyValue(p)}}}();
