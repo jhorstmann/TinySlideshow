@@ -33,13 +33,14 @@ TINY.slideshow.prototype={
 		}
 		for(i;i<this.l;i++){
 			this.a[i]={};
-			var h=m[i], a=this.a[i];
+			var h=m[i], a=this.a[i], a0=$$T('a',h)[0],img=$$T('img',h),p=img[0],g;
+			if (p.className=='thumbnail'){p=img[1];g=img[0];}
+			else{p=img[0];g=img[1];}
 			a.t=$$T('h3',h)[0].innerHTML;
 			a.d=$$T('p',h)[0].innerHTML;
-			a.l=$$T('a',h)[0]?$$T('a',h)[0].href:'';
-			a.p=$$T('span',h)[0].innerHTML;
-			if(this.thumbs){
-				var g=$$T('img',h)[0];
+			a.l=a0?a0.href:'';
+			a.p=p.src;
+			if(this.thumbs && g){
 				this.p.appendChild(g);
 				w+=parseInt(g.offsetWidth);
 				if(i!=this.l-1){
