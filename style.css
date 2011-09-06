@@ -2,16 +2,16 @@
 #slideshow span {display:none}
 #wrapper {width:500px; margin:0 auto; display:none}
 #wrapper * {margin:0; padding:0}
-#fullsize {position:relative; width:500px; height:300px; padding:0; border:0; background:#000}
+#fullsize {position:relative; width:500px; height:320px; padding:0; border:0; background:#000}
 #information {position:absolute; bottom:0; width:500px; height:0; background:#000; color:#fff; overflow:hidden; z-index:200; opacity:.7; filter:alpha(opacity=70)}
 #information h3 {padding:4px 8px 4px 8px; font-size:14px}
 #information p {padding:0 8px 8px}
-#image {width:500px}
+#image {width:500px; height:320px}
 #image img {position:absolute; z-index:25; width:auto}
-.imgnav {position:absolute; width:25%; height:300px; cursor:pointer; z-index:150}
+.imgnav {position:absolute; width:25%; height:320px; cursor:pointer; z-index:150}
 #imgprev {left:0; background:url(images/left.gif) left center no-repeat}
 #imgnext {right:0; background:url(images/right.gif) right center no-repeat}
-#imglink {position:absolute; height:300px; width:100%; z-index:100; opacity:.4; filter:alpha(opacity=40)}
+#imglink {position:absolute; height:320px; width:100%; z-index:100; opacity:.4; filter:alpha(opacity=40)}
 .linkhover {background:url(images/link.gif) center center no-repeat}
 #thumbnails {margin:0}
 #slideleft {float:left; width:20px; height:79px; background:url(images/scroll-left.gif) center center no-repeat; background-color:#222}

@@ -22,7 +22,8 @@ TINY.slideshow.prototype={
 		this.q=$T(q);
 		this.f=$T(z);
 		this.r=$T(this.info);
-		this.o=parseInt(TINY.style.val(z,'width'));
+		this.iw=parseInt(TINY.style.val(z,'width'));
+		this.ih=parseInt(TINY.style.val(z,'height'));
 		if(this.thumbs){
 			var u=$T(this.left), r=$T(this.right);
 			u.onmouseover=new Function('TINY.scroll.init("'+this.thumbs+'",-1,'+this.scrollSpeed+')');
@@ -97,11 +98,13 @@ TINY.slideshow.prototype={
 	},
 	le:function(s,c){
 		this.f.appendChild(this.i);
-		var w=this.o-parseInt(this.i.offsetWidth);
+		var w=this.iw-parseInt(this.i.offsetWidth);
 		if(w>0){
-			var l=Math.floor(w/2);
-			this.i.style.borderLeft=l+'px solid '+this.letterbox;
-			this.i.style.borderRight=(w-l)+'px solid '+this.letterbox
+			this.i.style.borderLeft=this.i.style.borderRight=Math.floor(w/2)+'px solid '+this.letterbox;
+		}
+		var h=this.ih-parseInt(this.i.offsetHeight);
+		if(h>0){
+			this.i.style.borderTop=this.i.style.borderBottom=Math.floor(h/2)+'px solid '+this.letterbox;
 		}
 		TINY.alpha.set(this.i,100,this.imgSpeed);
 		var n=new Function(this.n+'.nf('+s+')');
