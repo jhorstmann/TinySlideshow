@@ -15,7 +15,7 @@ TINY.slideshow=function(n){
 };
 
 TINY.slideshow.prototype={
-	init:function(s,z,b,f,q){
+	init:function(s,z,b,f,q,v){
 		s=$T(s);
 		var m=$$T('li',s), i=0, w=0;
 		this.l=m.length;
@@ -24,6 +24,7 @@ TINY.slideshow.prototype={
 		this.r=$T(this.info);
 		this.iw=parseInt(TINY.style.val(z,'width'));
 		this.ih=parseInt(TINY.style.val(z,'height'));
+		this.pw=parseInt(TINY.style.val(v,'width'));
 		if(this.thumbs){
 			var u=$T(this.left), r=$T(this.right);
 			u.onmouseover=new Function('TINY.scroll.init("'+this.thumbs+'",-1,'+this.scrollSpeed+')');
@@ -92,6 +93,13 @@ TINY.slideshow.prototype={
 		i.src=this.a[s].p;
 		if(this.thumbs){
 			var a=$$T('img',this.p), l=a.length, x=0;
+			var ol = this.p.offsetLeft + a[s].offsetLeft;
+			var or = ol + a[s].offsetWidth;
+			if(ol<0){
+				this.p.style.left=-a[s].offsetLeft+'px';
+			}else if(or>this.pw){
+				this.p.style.left=(this.pw-or+this.p.offsetLeft)+'px';
+			}
 			for(x;x<l;x++){
 				a[x].style.borderColor=x!=s?'':this.active
 			}
